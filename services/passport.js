@@ -2,15 +2,15 @@ const passport = require('passport');
 const User = require('../models/user');
 const config = require('../config');
 const JwtStategy = require('passport-jwt').Strategy;
-const extractJwt = require('passport-jwt').extractJwt;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const jwtOptions = {
-    jwtFromRequest: extractJwt.fromHeader('authorization'),
+    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
     secretOrKey: config.secret
 };
 
 //Create jwt strategy
-const jwtLogin = new Strategy(jwtOptions, function (payload, done) {
+const jwtLogin = new JwtStategy(jwtOptions, function (payload, done) {
     User.findById(payload.sub, function (err, user) {
         if (err) { return done(err, false) };
         if (user) {

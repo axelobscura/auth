@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 //DB Setup
 mongoose.connect('mongodb+srv://axosar:LjqhtCOj5b3BuiUa@cluster0-muwar.mongodb.net/auth?retryWrites=true&w=majority', {
@@ -14,6 +15,7 @@ mongoose.connect('mongodb+srv://axosar:LjqhtCOj5b3BuiUa@cluster0-muwar.mongodb.n
 
 //App setup
 app.use(morgan('combined'));
+app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
 
